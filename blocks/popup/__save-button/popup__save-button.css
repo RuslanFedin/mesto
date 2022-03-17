@@ -8,7 +8,7 @@
   border-style: none;
   background: none;
   cursor: pointer;
-  background-color: #000 ;
+  background-color: #000;
   color: #fff;
   font-size: 18px;
   font-weight: 400;
@@ -17,7 +17,7 @@
 }
 
 .popup__save-button:hover {
-  background-color: rgba(0, 0, 0, 0.6) ;
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 @media screen and (min-width: 320px) and (max-width:767px) {
