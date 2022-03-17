@@ -11,7 +11,7 @@
 
 * Figma
 * TinyPNG
-* HTNL
+* HTML
 * CSS
 * JavaScript
 
