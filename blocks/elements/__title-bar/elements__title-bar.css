@@ -1,0 +1,8 @@
+.elements__title-bar {
+  margin: 0;
+  padding: 25px 0 31px 21px;
+  width: 246px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}

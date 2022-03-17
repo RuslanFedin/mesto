@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mesto.Платформа для travel-блогеров</title>
+  <link rel="stylesheet" href="./pages/index.css">
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <a class="logo" href="#"><img class="logo__image" src="./images/logo__image.svg" alt="логотип Mesto"></a>
+    </header>
+    <main class="content">
+      <section class="profile">
+        <img class="profile__avatar avatar" src="./images/Avatar.png" alt="Аватар">
+        <div class="profile__info">
+          <div class="profile__username">
+            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <p class="profile__profession">Исследователь океана</p>
+          </div>
+          <button class="profile__edit-button"></button>
+        </div>
+        <button class="profile__add-button"></button>
+      </section>
+      <section class="elements">
+        <ul class="elements__photo-grid">
+          <li class="elements__element">
+            <a class="elements__link" href="#"><img class="elements__image" src="./images/Karachayevsk.jpg" alt="Руины древнего храма"></a>
+            <h2 class="elements__title">Карачаевск</h2>
+            <button class="elements__like"></button>
+          </li>
+          <li class="elements__element">
+            <a class="elements__link" href="#"><img class="elements__image" src="./images/Mountain_Elbrus.jpg" alt="Гора Эльбрус в дали"></a>
+            <h2 class="elements__title">Гора Эльбрус</h2>
+            <button class="elements__like"></button>
+          </li>
+          <li class="elements__element">
+            <a class="elements__link" href="#"><img class="elements__image" src="./images/Dombay.jpg" alt="Горы Домбая"></a>
+            <h2 class="elements__title">Домбай</h2>
+            <button class="elements__like"></button>
+          </li>
+          <li class="elements__element">
+            <a class="elements__link" href="#"><img class="elements__image" src="./images/Karelia.jpg" alt="Озеро в Карелии"></a>
+            <h2 class="elements__title">Карелия</h2>
+            <button class="elements__like"></button>
+          </li>
+          <li class="elements__element">
+            <a class="elements__link" href="#"><img class="elements__image" src="./images/Gagra.jpg" alt="Озеро в Гагре"></a>
+            <h2 class="elements__title">Гагра</h2>
+            <button class="elements__like"></button>
+          </li>
+          <li class="elements__element">
+            <a class="elements__link" href="#"><img class="elements__image"  src="./images/Karachay-Cherkessia.jpg" alt="Озеро в Карачаево-Черкесии"></a>
+            <h2 class="elements__title">Карачаево-Черкессия</h2>
+            <button class="elements__like"></button>
+          </li>
+        </ul>
+      </section>
+    </main>
+    <footer class="footer">
+      <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
+    </footer>
+    <div class="popup">
+      <div class="popup__container">
+        <button class="popup__close-button"></button>
+        <form class="popup__content">
+          <h3 class="popup__title">Редактировать профиль</h3>
+          <input type="text" class="popup__name">
+          <input type="text" class="popup__profession">
+          <button type="submit" class="popup__save-button">Сохранить</button>
+        </form>
+      </div>
+    </div>
+  </div>
+<script src="./scripts/index.js"></script>
+</body>
+</html>
