@@ -4,7 +4,7 @@
   position: relative;
   width: 282px;
   height: 282px;
-  transition: 0.6s;
+  transition: opacity 0.6s;
 }
 
 .elements__link:after{
@@ -13,7 +13,7 @@
   inset: 0;
   background: #000;
   opacity: 0;
-  transition: 0.6s;
+  transition: opacity 0.6s;
 }
 
 .elements__link:hover:after {
