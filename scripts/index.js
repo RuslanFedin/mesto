@@ -1,13 +1,14 @@
-const editButton = document.querySelector('.profile__edit-button'); // Запрашиваем кнопку редактирования профиля
-const popupElement = document.querySelector('.popup'); // Запрашиваем попап
-const closeButton = popupElement.querySelector('.popup__close-button'); // Запрашиваем кнопку закрытия попапа
-const ESC_KEY = "Escape"; // Объявляем клавишу Esc
+const editButton = document.querySelector('.profile__edit-button');
+const addButton = document.querySelector('.profile__add-button');
+const popupElement = document.querySelector('.popup');
+const closeButton = popupElement.querySelector('.popup__close-button');
+const ESC_KEY = "Escape";
 
-let formElement = document.querySelector('.popup__container'); // Запрашиваем форму попапа
-let nameInput = formElement.querySelector('.popup__name'); // Запрашиваем строку ввода имени
-let professionInput = formElement.querySelector('.popup__profession'); // Запрашиваем строку ввода професии
-let name = document.querySelector('.profile__name'); // Находим  элемент с изменяемым текстом
-let profession = document.querySelector('.profile__profession'); //Находим  элемент с изменяемым текстом
+let formElement = document.querySelector('.popup__container');
+let nameInput = formElement.querySelector('.popup__name');
+let professionInput = formElement.querySelector('.popup__profession');
+let name = document.querySelector('.profile__name');
+let profession = document.querySelector('.profile__profession');
 
 function openPopup () {
   popupElement.classList.add('popup_opened');
