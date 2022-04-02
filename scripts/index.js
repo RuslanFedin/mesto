@@ -1,46 +1,19 @@
-// РЕДАКТИРОВАНИЕ ПРОФИЛЯ
-
-let name = document.querySelector('.profile__name');
-let profession = document.querySelector('.profile__profession');
-const editButton = document.querySelector('.profile__edit-button');
-let formElement = document.querySelector('.popup__container');
+const name = document.querySelector('.profile__name');
+const profession = document.querySelector('.profile__profession');
+const buttonEditProfile = document.querySelector('.profile__edit-button');
+const formElement = document.querySelector('.popup__container');
 const popupEditProfile = document.querySelector('.popup_edit-profile');
-const closeButtonEditProfile = popupEditProfile.querySelector('.popup__close-button');
-let nameInput = formElement.querySelector('.popup__name');
-let professionInput = formElement.querySelector('.popup__profession');
-
-function openPopupEditProfile () { // Открываем popup
-  popupEditProfile.classList.add('popup_opened');
-  document.addEventListener('keyup', onDocumentKeyUp);
-  nameInput.value = name.textContent;
-  professionInput.value = profession.textContent;
-}
-
-function formSubmitHandler (evt) { // Отправляем форму и вставляем содержимое на страницу
-  evt.preventDefault();
-  name.textContent = nameInput.value;
-  profession.textContent = professionInput.value;
-  closePopup();
-}
-
-editButton.addEventListener('click', openPopupEditProfile);
-closeButtonEditProfile.addEventListener('click', closePopup); //Закрываем Popup
-formElement.addEventListener('submit', formSubmitHandler); // Обработчик событий в форме попапа: он будет следить за событием “submit” - «отправка»
-
-// ДОБАВЛЕНИЕ НОВОЙ ПУБЛИКАЦИИ
-
-const addButton = document.querySelector('.profile__add-button');
+const buttonEditProfileClose = popupEditProfile.querySelector('.popup__close-button');
+const nameInput = formElement.querySelector('.popup__name');
+const professionInput = formElement.querySelector('.popup__profession');
+const buttonAddPlace = document.querySelector('.profile__add-button');
 const popupAddPlace = document.querySelector('.popup_add-place');
-const closeButtonAddPlace = popupAddPlace.querySelector('.popup__close-button');
-
-function openPopupAddPlace () { // Открываем popup
-  popupAddPlace.classList.add('popup_opened');
-  document.addEventListener('keyup', onDocumentKeyUp);
-}
-addButton.addEventListener('click', openPopupAddPlace);
-closeButtonAddPlace.addEventListener('click', closePopup); //Закрываем Popup
-
-const initialCards = [ //При загрузке страницы JS добавляет 6 фотокарточек //Это массив карточек
+const buttonCloseAddPlace = popupAddPlace.querySelector('.popup__close-button');
+const elementsPhotoContainer = document.querySelector('.elements__photo-grid'); // берем всю галлерею ( там массив)
+const placeFormAdd = popupAddPlace.querySelector('.popup__add-place-form'); // Добавляем елемент формы
+const placeNameInput = placeFormAdd.querySelector('.popup__place-tittle'); // Добавляем input названия места
+const placeLinkInput = placeFormAdd.querySelector('.popup__place-photo'); // Добавляем input фотографии места
+const cardsInitial = [ //При загрузке страницы JS добавляет 6 фотокарточек //Это массив карточек
   {
     name: 'Михалыч',
     link: 'https://images.unsplash.com/photo-1568051131683-700fd7420b5a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fGtpdHR5fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60'
@@ -67,78 +40,100 @@ const initialCards = [ //При загрузке страницы JS добав�
   }
 ];
 
-const elementsPhotoContainer = document.querySelector('.elements__photo-grid'); // берем всю галлерею ( там массив)
-const addPlaceForm = popupAddPlace.querySelector('.popup__add-place-form'); // Добавляем елемент формы
-let namePlaceInput = addPlaceForm.querySelector('.popup__place-tittle'); // Добавляем input названия места
-let linkPlaceInput = addPlaceForm.querySelector('.popup__place-photo'); // Добавляем input фотографии места
+// РЕДАКТИРОВАНИЕ ПРОФИЛЯ
 
+buttonEditProfile.addEventListener('click', () => { //Вещаю слушатель на кнопку редактирования профиля и присваиваю функцию открытия popup редактирования профиля.
+  nameInput.value = name.textContent;
+  professionInput.value = profession.textContent;
+  openPopup(popupEditProfile);
+});
+
+function handleSubmitForm (evt) { // Отправляем форму и вставляем содержимое на страницу
+  evt.preventDefault();
+  name.textContent = nameInput.value;
+  profession.textContent = professionInput.value;
+  closePopup(popupEditProfile);
+}
+
+buttonEditProfileClose.addEventListener('click', () => { //Вешаю слушатель на кнопку закрытия popup и присваиваю функцию закрытия popup редактирования профиля
+  closePopup(popupEditProfile);
+});
+
+formElement.addEventListener('submit', handleSubmitForm); // Обработчик событий в форме попапа: он будет следить за событием “submit” - «отправка»
+
+// ДОБАВЛЕНИЕ ПУБЛИКАЦИИ
+
+buttonAddPlace.addEventListener('click', () => { // Вешаю слушатель на кнопку добавления публтикации  и присваиваю функцию открытия popup.
+  openPopup(popupAddPlace);
+})
+
+buttonCloseAddPlace.addEventListener('click', () => { // Вешаю слушатель на кнопку закрытия popup добавления публикации и присваиваю функцию закрытия popup.
+  closePopup(popupAddPlace);
+})
 
 const createPhotos = (photoCard) => { // Функция которая генерирует HTML элемент. Затем будем добавлять его в массив галлереи в начало массива.
   const template = document.querySelector('#element-template').content;
   const elementItem = template.querySelector('.element-item').cloneNode(true);
-  elementItem.querySelector('.element-item__image').src = photoCard.link;
-  elementItem.querySelector('.element-item__image').alt = photoCard.name;
+  const imagePopup = document.querySelector('.popup_image-place'); // Popup картинки
+  const imageFull = imagePopup.querySelector('.popup__image-full');
+  const imageTittle = imagePopup.querySelector('.popup__image-tittle');
+  const buttonImageClose = imagePopup.querySelector('.popup__close-button');
+  const imageToFull = elementItem.querySelector('.element-item__image'); // Задаем переменную и вещаем слушатель. При клике на нее, должен открываться попап.
+  const buttonLike = elementItem.querySelector('.element-item__like');
+  const elementImage= elementItem.querySelector('.element-item__image');
+  elementImage.src = photoCard.link;
+  elementImage.alt = photoCard.name;
   elementItem.querySelector('.element-item__title').textContent = photoCard.name;
   elementItem.querySelector('.element-item__remove').addEventListener('click', () => { // Удаление публикации
     elementItem.remove();
   });
-  const likeButton = elementItem.querySelector('.element-item__like'); // Реализация лайка
-  likeButton.onclick = (event) => {
+
+  buttonLike.addEventListener('click', () => { // Реализация лайка
     event.target.classList.toggle('element-item__like_active');
-  }
-  const imageToFull = elementItem.querySelector('.element-item__image'); // Задаем переменную и вещаем слушатель. При клике на нее, должен открываться попап.
-  imageToFull.addEventListener('click', () => {
-    openPopupImage(photoCard);
+  });
+
+  imageToFull.addEventListener('click', () => { // ПРОСМОТР КАРТИНКИ. Вешаю слушатель на картинку и присваиваю функцию открытия popup
+    imageFull.src = photoCard.link;
+    imageFull.alt = photoCard.name;
+    imageTittle.textContent = photoCard.name;
+    openPopup(imagePopup);
+  });
+
+  buttonImageClose.addEventListener('click', () => { // Вешаем слушатель на закрытие картинки и присваиваем функцию закрытия popup
+    closePopup(imagePopup);
   });
 
   return elementItem;
 }
 
-const imagePopup = document.querySelector('.popup_image-place'); // Popup картинки
-const imageCloseButton = imagePopup.querySelector('.popup__close-button');
-function openPopupImage (photoCard) {  //Открываем попап с картинкой
-  imagePopup.classList.add ('popup_opened');
-  imagePopup.querySelector('.popup__image-full').src = photoCard.link;
-  imagePopup.querySelector('.popup__image-full').alt = photoCard.name;
-  imagePopup.querySelector('.popup__image-tittle').textContent = photoCard.name;
-  document.addEventListener('keyup', onDocumentKeyUp);
-}
-imageCloseButton.addEventListener('click', closePopup); // Закрываем попап
-
-const renderPlace = (photoCard) => {
+const renderPlace = (photoCard) => { //Вставляем новые карточки перед старыми
   elementsPhotoContainer.prepend(createPhotos(photoCard));
 }
 
 const addPlace = (event) => { //Функция добавления публикации
   event.preventDefault(); //Запрещаем выполнение события по умолчанию, чтобы при отправе страница не перезагружалась
   const photoCard = { }; // Создаем объект
-  photoCard.name = namePlaceInput.value; // Присваиваем для name объекта значение из инпута name;
-  photoCard.link = linkPlaceInput.value; // Присваиваем для link объеата значение из инпута link.
+  photoCard.name = placeNameInput.value; // Присваиваем для name объекта значение из инпута name;
+  photoCard.link = placeLinkInput.value; // Присваиваем для link объеата значение из инпута link.
   renderPlace(photoCard);
-  namePlaceInput.value = '';
-  linkPlaceInput.value = '';
-  closePopup();
+  closePopup(popupAddPlace); // Закрываем Popup
+  placeNameInput.value = ''; // Сбрасываем введенные значения
+  placeLinkInput.value = ''; // Сбрасываем введенные значения
 }
 
-const placeCard = initialCards.map(photoCard =>{ // Проходимся по массиву карточек и выводим результат в новый отдельный массив.
+const placeCard = cardsInitial.map(photoCard =>{ // Проходимся по массиву карточек и выводим результат в новый отдельный массив.
   return createPhotos(photoCard);
 });
 
 elementsPhotoContainer.append(...placeCard);
-addPlaceForm.addEventListener('submit', addPlace); //Вешаем обработчик события на форму добавления новой карточки. При нажатии на Создать, выполнятся функция addPlace
+placeFormAdd.addEventListener('submit', addPlace); //Вешаем обработчик события на форму добавления новой карточки. При нажатии на Создать, выполнятся функция addPlace
 
-function closePopup () { // Закрываем popup при клике на кнопку
-  popupEditProfile.classList.remove('popup_opened');
-  popupAddPlace.classList.remove('popup_opened');
-  imagePopup.classList.remove('popup_opened');
-  document.removeEventListener('keyup', onDocumentKeyUp);
+function openPopup(popup) { // Общая функция открытия popup с аргументом на входе popup
+  popup.classList.add('popup_opened');
 }
 
-const ESC_KEY = "Escape"; // Закрываем popup при нажатии Esc
-function onDocumentKeyUp(event){
-  if (event.key === ESC_KEY){
-    closePopup();
-  }
+function closePopup(popup) { //Общая функция закрытия popup с аргументом на входе popup
+  popup.classList.remove('popup_opened');
 }
 
 
