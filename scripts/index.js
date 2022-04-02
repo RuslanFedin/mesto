@@ -4,7 +4,7 @@ let name = document.querySelector('.profile__name');
 let profession = document.querySelector('.profile__profession');
 const editButton = document.querySelector('.profile__edit-button');
 let formElement = document.querySelector('.popup__container');
-const popupEditProfile = document.querySelector('.popup__edit-profile');
+const popupEditProfile = document.querySelector('.popup_edit-profile');
 const closeButtonEditProfile = popupEditProfile.querySelector('.popup__close-button');
 let nameInput = formElement.querySelector('.popup__name');
 let professionInput = formElement.querySelector('.popup__profession');
@@ -30,7 +30,7 @@ formElement.addEventListener('submit', formSubmitHandler); // Обработчи
 // ДОБАВЛЕНИЕ НОВОЙ ПУБЛИКАЦИИ
 
 const addButton = document.querySelector('.profile__add-button');
-const popupAddPlace = document.querySelector('.popup__add-place');
+const popupAddPlace = document.querySelector('.popup_add-place');
 const closeButtonAddPlace = popupAddPlace.querySelector('.popup__close-button');
 
 function openPopupAddPlace () { // Открываем popup
@@ -94,7 +94,7 @@ const createPhotos = (photoCard) => { // Функция которая гене�
   return elementItem;
 }
 
-const imagePopup = document.querySelector('.popup__image-place'); // Popup картинки
+const imagePopup = document.querySelector('.popup_image-place'); // Popup картинки
 const imageCloseButton = imagePopup.querySelector('.popup__close-button');
 function openPopupImage (photoCard) {  //Открываем попап с картинкой
   imagePopup.classList.add ('popup_opened');
