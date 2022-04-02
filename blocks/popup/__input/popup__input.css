@@ -13,6 +13,10 @@
   overflow: hidden;
 }
 
+.popup__input::placeholder{
+  color: #C4C4C4;
+}
+
 .popup__input:first-of-type{
   padding-top: 49px;
 }

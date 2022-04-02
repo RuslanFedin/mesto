@@ -26,67 +26,14 @@
       </section>
       <section aria-label="Фотогалерея пользователя" class="elements">
         <ul class="elements__photo-grid">
-          <li class="elements__element">
-            <article class="elements__article">
-              <a class="elements__link" href="#"><img class="elements__image" src="./images/Karachayevsk.jpg" alt="Руины древнего храма"></a>
-              <div class="elements__footer">
-                <h2 class="elements__title">Карачаевск</h2>
-                <button class="elements__like"></button>
-            </div>
-            </article>
-          </li>
-          <li class="elements__element">
-            <article class="elements__article">
-              <a class="elements__link" href="#"><img class="elements__image" src="./images/Mountain_Elbrus.jpg" alt="Гора Эльбрус в дали"></a>
-              <div class="elements__footer">
-                <h2 class="elements__title">Гора Эльбрус</h2>
-                <button aria-label="Нравится" class="elements__like"></button>
-              </div>
-            </article>
-          </li>
-          <li class="elements__element">
-            <article class="elements__article">
-              <a class="elements__link" href="#"><img class="elements__image" src="./images/Dombay.jpg" alt="Горы Домбая"></a>
-              <div class="elements__footer">
-                <h2 class="elements__title">Домбай</h2>
-                <button aria-label="Нравится" class="elements__like"></button>
-              </div>
-            </article>
-          </li>
-          <li class="elements__element">
-            <article class="elements__article">
-              <a class="elements__link" href="#"><img class="elements__image" src="./images/Karelia.jpg" alt="Озеро в Карелии"></a>
-              <div class="elements__footer">
-                <h2 class="elements__title">Карелия</h2>
-                <button aria-label="Нравится" class="elements__like"></button>
-              </div>
-            </article>
-          </li>
-          <li class="elements__element">
-            <article class="elements__article">
-              <a class="elements__link" href="#"><img class="elements__image" src="./images/Gagra.jpg" alt="Озеро в Гагре"></a>
-              <div class="elements__footer">
-                <h2 class="elements__title">Гагра</h2>
-                <button aria-label="Нравится" class="elements__like"></button>
-              </div>
-            </article>
-          </li>
-          <li class="elements__element">
-            <article class="elements__article">
-              <a class="elements__link" href="#"><img class="elements__image"  src="./images/Karachay-Cherkessia.jpg" alt="Озеро в Карачаево-Черкесии"></a>
-              <div class="elements__footer">
-                <h2 class="elements__title">Карачаево-Черкессия</h2>
-                <button aria-label="Нравится" class="elements__like"></button>
-              </div>
-            </article>
-          </li>
         </ul>
       </section>
     </main>
     <footer class="footer">
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
-    <div class="popup">
+
+    <div class="popup popup__edit-profile">
       <div class="popup__container">
         <button aria-label="Закрыть" class="popup__close-button"></button>
         <form class="popup__content">
@@ -97,7 +44,41 @@
         </form>
       </div>
     </div>
+
+    <div class="popup popup__add-place">
+      <div class="popup__container">
+        <button aria-label="Закрыть" class="popup__close-button"></button>
+        <form class="popup__content popup__add-place-form">
+          <h3 class="popup__title">Новое место</h3>
+            <input type="text" class="popup__input popup__name popup__place-tittle" placeholder="Название">
+            <input type="text" class="popup__input popup__profession popup__place-photo" placeholder="Ссылка на картинку">
+          <button aria-label="Создать" type="submit" class="popup__save-button">Создать</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="popup popup__image-place">
+      <div class="popup__container popup__image-container">
+        <button aria-label="Закрыть" class="popup__close-button"></button>
+        <img class="popup__image-full" src="#" alt="подпись к картинке">
+        <p class="popup__image-tittle"></p>
+      </div>
+    </div>
   </div>
+
+<template id="element-template">
+  <li class="element-item">
+    <article class="element-item__article">
+      <button aria-label="Удалить" class="element-item__remove"></button>
+      <img class="element-item__image" src="#" alt="подпись к картинке">
+      <div class="element-item__footer">
+        <h2 class="element-item__title"></h2>
+        <button aria-label="Нравится" class="element-item__like"></button>
+      </div>
+    </article>
+  </li>
+</template>
+
 <script src="./scripts/index.js"></script>
 </body>
 </html>
