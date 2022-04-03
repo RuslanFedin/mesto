@@ -13,6 +13,11 @@ const elementsPhotoContainer = document.querySelector('.elements__photo-grid'); 
 const placeFormAdd = popupAddPlace.querySelector('.popup__add-place-form'); // Добавляем елемент формы
 const placeNameInput = placeFormAdd.querySelector('.popup__place-tittle'); // Добавляем input названия места
 const placeLinkInput = placeFormAdd.querySelector('.popup__place-photo'); // Добавляем input фотографии места
+const template = document.querySelector('#element-template').content;
+const imagePopup = document.querySelector('.popup_image-place'); // Popup картинки
+const imageFull = imagePopup.querySelector('.popup__image-full');
+const imageTittle = imagePopup.querySelector('.popup__image-tittle');
+const buttonImageClose = imagePopup.querySelector('.popup__close-button');
 const cardsInitial = [ //При загрузке страницы JS добавляет 6 фотокарточек //Это массив карточек
   {
     name: 'Михалыч',
@@ -72,12 +77,7 @@ buttonCloseAddPlace.addEventListener('click', () => { // Вешаю слушат
 })
 
 const createPhotos = (photoCard) => { // Функция которая генерирует HTML элемент. Затем будем добавлять его в массив галлереи в начало массива.
-  const template = document.querySelector('#element-template').content;
   const elementItem = template.querySelector('.element-item').cloneNode(true);
-  const imagePopup = document.querySelector('.popup_image-place'); // Popup картинки
-  const imageFull = imagePopup.querySelector('.popup__image-full');
-  const imageTittle = imagePopup.querySelector('.popup__image-tittle');
-  const buttonImageClose = imagePopup.querySelector('.popup__close-button');
   const imageToFull = elementItem.querySelector('.element-item__image'); // Задаем переменную и вещаем слушатель. При клике на нее, должен открываться попап.
   const buttonLike = elementItem.querySelector('.element-item__like');
   const elementImage= elementItem.querySelector('.element-item__image');
@@ -99,12 +99,12 @@ const createPhotos = (photoCard) => { // Функция которая гене�
     openPopup(imagePopup);
   });
 
-  buttonImageClose.addEventListener('click', () => { // Вешаем слушатель на закрытие картинки и присваиваем функцию закрытия popup
-    closePopup(imagePopup);
-  });
-
   return elementItem;
 }
+
+buttonImageClose.addEventListener('click', () => { // Вешаем слушатель на закрытие картинки и присваиваем функцию закрытия popup
+  closePopup(imagePopup);
+});
 
 const renderPlace = (photoCard) => { //Вставляем новые карточки перед старыми
   elementsPhotoContainer.prepend(createPhotos(photoCard));
