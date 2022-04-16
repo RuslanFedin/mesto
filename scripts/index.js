@@ -18,38 +18,37 @@ const imagePopup = document.querySelector('.popup_image-place'); // Popup кар
 const imageFull = imagePopup.querySelector('.popup__image-full');
 const imageTittle = imagePopup.querySelector('.popup__image-tittle');
 const buttonImageClose = imagePopup.querySelector('.popup__close-button');
-const cardsInitial = [ //При загрузке страницы JS добавляет 6 фотокарточек //Это массив карточек
-  {
-    name: 'Михалыч',
-    link: 'https://images.unsplash.com/photo-1568051131683-700fd7420b5a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fGtpdHR5fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60'
-  },
-  {
-    name: 'Егор Алексеевич',
-    link: 'https://images.unsplash.com/photo-1555685812-4b943f1cb0eb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
-  },
-  {
-    name: 'Пётр',
-    link: 'https://images.unsplash.com/photo-1555595925-69049e7b7682?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'
-  },
-  {
-    name: 'Станислав',
-    link: 'https://images.unsplash.com/photo-1557246565-8a3d3ab5d7f6?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
-  },
-  {
-    name: 'Аркадий',
-    link: 'https://images.unsplash.com/photo-1638947693941-669835e07b4c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80'
-  },
-  {
-    name: 'Жора',
-    link: 'https://images.unsplash.com/photo-1611145949721-e5158cddf59f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80'
-  }
-];
+const buttonElement = document.querySelector('.popup__save-button');
+const validationConfig = {
+  formSelector: '.popup__content',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__save-button',
+  inactiveButtonClass: 'popup__save-button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+};
 
-// РЕДАКТИРОВАНИЕ ПРОФИЛЯ
+// сосдаем массив попапов
+const popupList = Array.from(document.querySelectorAll('.popup'));
+console.log(popupList);
 
+// закрываем попап по оверлею и по кнопке закрытия
+popupList.forEach( (popup) => {
+  popup.addEventListener('mousedown', (event) => {
+    if (event.target.classList.contains('popup_opened')){
+      closePopup(popup);
+    };
+    if (event.target.classList.contains('popup__close-button')){
+      closePopup(popup);
+    };
+  });
+});
+
+// редактирование профиля
 buttonEditProfile.addEventListener('click', () => { //Вещаю слушатель на кнопку редактирования профиля и присваиваю функцию открытия popup редактирования профиля.
   nameInput.value = name.textContent;
   professionInput.value = profession.textContent;
+  enableButton(buttonElement, validationConfig);
   openPopup(popupEditProfile);
 });
 
@@ -60,25 +59,16 @@ function handleSubmitForm (evt) { // Отправляем форму и вста
   closePopup(popupEditProfile);
 }
 
-buttonEditProfileClose.addEventListener('click', () => { //Вешаю слушатель на кнопку закрытия popup и присваиваю функцию закрытия popup редактирования профиля
-  closePopup(popupEditProfile);
-});
-
 formElement.addEventListener('submit', handleSubmitForm); // Обработчик событий в форме попапа: он будет следить за событием “submit” - «отправка»
 
-// ДОБАВЛЕНИЕ ПУБЛИКАЦИИ
-
+// добавление публикации
 buttonAddPlace.addEventListener('click', () => { // Вешаю слушатель на кнопку добавления публтикации  и присваиваю функцию открытия popup.
+  disableButton(buttonElement, validationConfig);
   openPopup(popupAddPlace);
-})
-
-buttonCloseAddPlace.addEventListener('click', () => { // Вешаю слушатель на кнопку закрытия popup добавления публикации и присваиваю функцию закрытия popup.
-  closePopup(popupAddPlace);
 })
 
 const createPhotos = (photoCard) => { // Функция которая генерирует HTML элемент. Затем будем добавлять его в массив галлереи в начало массива.
   const elementItem = template.querySelector('.element-item').cloneNode(true);
-  const imageToFull = elementItem.querySelector('.element-item__image'); // Задаем переменную и вещаем слушатель. При клике на нее, должен открываться попап.
   const buttonLike = elementItem.querySelector('.element-item__like');
   const elementImage= elementItem.querySelector('.element-item__image');
   elementImage.src = photoCard.link;
@@ -92,7 +82,7 @@ const createPhotos = (photoCard) => { // Функция которая гене�
     event.target.classList.toggle('element-item__like_active');
   });
 
-  imageToFull.addEventListener('click', () => { // ПРОСМОТР КАРТИНКИ. Вешаю слушатель на картинку и присваиваю функцию открытия popup
+  elementImage.addEventListener('click', () => { // ПРОСМОТР КАРТИНКИ. Вешаю слушатель на картинку и присваиваю функцию открытия popup
     imageFull.src = photoCard.link;
     imageFull.alt = photoCard.name;
     imageTittle.textContent = photoCard.name;
@@ -101,10 +91,6 @@ const createPhotos = (photoCard) => { // Функция которая гене�
 
   return elementItem;
 }
-
-buttonImageClose.addEventListener('click', () => { // Вешаем слушатель на закрытие картинки и присваиваем функцию закрытия popup
-  closePopup(imagePopup);
-});
 
 const renderPlace = (photoCard) => { //Вставляем новые карточки перед старыми
   elementsPhotoContainer.prepend(createPhotos(photoCard));
@@ -130,11 +116,24 @@ placeFormAdd.addEventListener('submit', addPlace); //Вешаем обработ
 
 function openPopup(popup) { // Общая функция открытия popup с аргументом на входе popup
   popup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupByEsc);
 }
 
 function closePopup(popup) { //Общая функция закрытия popup с аргументом на входе popup
   popup.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupByEsc);
 }
+
+function closePopupByEsc(evt) { //Закрытие Popup кнопкой Escape
+  const popupOpened = document.querySelector('.popup_opened');
+  if (evt.key === 'Escape') {
+    closePopup(popupOpened);
+  };
+}
+
+
+
+
 
 
 

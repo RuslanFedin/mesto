@@ -36,10 +36,30 @@
     <div class="popup popup_edit-profile">
       <div class="popup__container">
         <button aria-label="Закрыть" class="popup__close-button"></button>
-        <form class="popup__content">
+        <form class="popup__content popup__edit-user-form" novalidate name="user">
           <h3 class="popup__title">Редактировать профиль</h3>
-            <input type="text" class="popup__input popup__name">
-            <input type="text" class="popup__input popup__profession">
+            <input
+              type="text"
+              id="username"
+              name="username"
+              class="popup__input popup__name"
+              minlength="2"
+              maxlength="40"
+              required
+              placeholder="Имя"
+            />
+          <span id="username-error" class="popup__error_visible"></span>
+            <input
+              type="text"
+              id="about"
+              name="about"
+              class="popup__input popup__profession"
+              minlength="2"
+              maxlength="200"
+              required
+              placeholder="О себе"
+            />
+          <span id="about-error" class="popup__error_visible"></span>
           <button aria-label="Сохранить" type="submit" class="popup__save-button">Сохранить</button>
         </form>
       </div>
@@ -48,10 +68,28 @@
     <div class="popup popup_add-place">
       <div class="popup__container">
         <button aria-label="Закрыть" class="popup__close-button"></button>
-        <form class="popup__content popup__add-place-form">
+        <form class="popup__content popup__add-place-form" novalidate name="place">
           <h3 class="popup__title">Новое место</h3>
-            <input type="text" class="popup__input popup__name popup__place-tittle" placeholder="Название">
-            <input type="text" class="popup__input popup__profession popup__place-photo" placeholder="Ссылка на картинку">
+            <input
+              type="text"
+              id="nameplace"
+              name="nameplace"
+              class="popup__input popup__name popup__place-tittle"
+              minlength="2"
+              maxlength="30"
+              required
+              placeholder="Название места"
+            />
+          <span id="nameplace-error" class="popup__error_visible"></span>
+            <input
+              type="url"
+              id="link"
+              name="link"
+              class="popup__input popup__profession popup__place-photo"
+              required
+              placeholder="Ссылка на картинку"
+            />
+          <span id="link-error" class="popup__error_visible"></span>
           <button aria-label="Создать" type="submit" class="popup__save-button">Создать</button>
         </form>
       </div>
@@ -79,6 +117,8 @@
   </li>
 </template>
 
+<script src="./scripts/cards.js"></script>
 <script src="./scripts/index.js"></script>
+<script src="./scripts/validate.js"></script>
 </body>
 </html>
