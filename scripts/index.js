@@ -18,7 +18,8 @@ const imagePopup = document.querySelector('.popup_image-place'); // Popup кар
 const imageFull = imagePopup.querySelector('.popup__image-full');
 const imageTittle = imagePopup.querySelector('.popup__image-tittle');
 const buttonImageClose = imagePopup.querySelector('.popup__close-button');
-const buttonElement = document.querySelector('.popup__save-button');
+const buttonElementEditProfile = document.querySelector('.popup__save-button_edit-profile');
+const buttonElementAddPlace = document.querySelector('.popup__save-button_add-place')
 const validationConfig = {
   formSelector: '.popup__content',
   inputSelector: '.popup__input',
@@ -30,15 +31,11 @@ const validationConfig = {
 
 // сосдаем массив попапов
 const popupList = Array.from(document.querySelectorAll('.popup'));
-console.log(popupList);
 
 // закрываем попап по оверлею и по кнопке закрытия
 popupList.forEach( (popup) => {
   popup.addEventListener('mousedown', (event) => {
-    if (event.target.classList.contains('popup_opened')){
-      closePopup(popup);
-    };
-    if (event.target.classList.contains('popup__close-button')){
+    if (event.target.classList.contains('popup_opened') || event.target.classList.contains('popup__close-button')){
       closePopup(popup);
     };
   });
@@ -48,7 +45,7 @@ popupList.forEach( (popup) => {
 buttonEditProfile.addEventListener('click', () => { //Вещаю слушатель на кнопку редактирования профиля и присваиваю функцию открытия popup редактирования профиля.
   nameInput.value = name.textContent;
   professionInput.value = profession.textContent;
-  enableButton(buttonElement, validationConfig);
+  enableButton(buttonElementEditProfile, validationConfig);
   openPopup(popupEditProfile);
 });
 
@@ -63,7 +60,7 @@ formElement.addEventListener('submit', handleSubmitForm); // Обработчи�
 
 // добавление публикации
 buttonAddPlace.addEventListener('click', () => { // Вешаю слушатель на кнопку добавления публтикации  и присваиваю функцию открытия popup.
-  disableButton(buttonElement, validationConfig);
+  disableButton(buttonElementAddPlace, validationConfig);
   openPopup(popupAddPlace);
 })
 
@@ -125,8 +122,8 @@ function closePopup(popup) { //Общая функция закрытия popup 
 }
 
 function closePopupByEsc(evt) { //Закрытие Popup кнопкой Escape
-  const popupOpened = document.querySelector('.popup_opened');
   if (evt.key === 'Escape') {
+    const popupOpened = document.querySelector('.popup_opened');
     closePopup(popupOpened);
   };
 }

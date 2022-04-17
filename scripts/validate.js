@@ -53,6 +53,7 @@ const disableButton = (buttonElement, config) => {
 const enableButton = (buttonElement, config) => {
   buttonElement.classList.remove(config.inactiveButtonClass);
   buttonElement.disabled = false;
+
 };
 
 // переключаем состояние кнопки
