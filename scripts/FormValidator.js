@@ -25,23 +25,23 @@ class FormValidator {
   _setEventListeners() {
     this.toggleButtonState();
     this._inputList.forEach((inputElement) => {
-      inputElement.addEventListener('input', function() {
-        this._checkInputValidity();
-        this.toggleButtonState();
+      inputElement.addEventListener('input', () => {
+        this._checkInputValidity(inputElement);
+        this.toggleButtonState(this._inputList);
       });
     });
   }
 
   // Изменяем состояние кнопки на активное
   _enableButton = () => {
-    this._submitButton.disabled = false;
-    this._submitButton.classList.remove(this._inactiveButtonClass);
+    this._buttonElement.disabled = false;
+    this._buttonElement.classList.remove(this._inactiveButton);
   }
 
   // Изменяем состояние кнопки на не активное
   _disableButton = () => {
-    this._submitButton.disabled = true;
-    this._submitButton.classList.add(this._inactiveButtonClass);
+    this._buttonElement.disabled = true;
+    this._buttonElement.classList.add(this._inactiveButton);
   }
 
   // Переключаем состояния кнопки в зависимости от валидности формы
@@ -63,15 +63,15 @@ class FormValidator {
   // Переключаем отображение ошибки в зависимости от валидности формы
   _checkInputValidity = (inputElement) => {
     if (!inputElement.validity.valid) {
-      _showInputError(inputElement, inputElement.validationMessage);
+      this._showInputError(inputElement, inputElement.validationMessage);
     } else {
-      _hideInputError(inputElement);
+      this._hideInputError(inputElement);
     }
   };
 
   // Показываем текст ошибки
-  _showInputError = (inputElement) => {
-    const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
+  _showInputError = (inputElement, errorMessage) => {
+    const errorElement = this._form.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.add(this._inputError);
     errorElement.textContent = errorMessage;
     errorElement.classList.add(this._errorText);
@@ -79,7 +79,7 @@ class FormValidator {
 
   // Скрываем текст ошибки
   _hideInputError = (inputElement) => {
-    const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
+    const errorElement = this._form.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.remove(this._inputError);
     errorElement.classList.remove(this._errorText);
     errorElement.textContent = '';
