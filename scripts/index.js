@@ -1,17 +1,18 @@
 import { cardsInitial, Card } from './card.js';
-import { FormValidator } from './FormValidator.js';
+import { validationConfig, FormValidator } from './FormValidator.js';
 
 const name = document.querySelector('.profile__name');
 const profession = document.querySelector('.profile__profession');
 const buttonEditProfile = document.querySelector('.profile__edit-button');
 const formElement = document.querySelector('.popup__container');
 const popupEditProfile = document.querySelector('.popup_edit-profile');
-// const buttonEditProfileClose = popupEditProfile.querySelector('.popup__close-button');
+const editProfileForm = popupEditProfile.querySelector('.popup__edit-user-form');
+const buttonEditProfileClose = popupEditProfile.querySelector('.popup__close-button');
 const nameInput = formElement.querySelector('.popup__name');
 const professionInput = formElement.querySelector('.popup__profession');
 const buttonAddPlace = document.querySelector('.profile__add-button');
 const popupAddPlace = document.querySelector('.popup_add-place');
-// const buttonCloseAddPlace = popupAddPlace.querySelector('.popup__close-button');
+const buttonCloseAddPlace = popupAddPlace.querySelector('.popup__close-button');
 const elementsPhotoContainer = document.querySelector('.elements__photo-grid'); // берем всю галлерею ( там массив)
 const placeFormAdd = popupAddPlace.querySelector('.popup__add-place-form'); // Добавляем елемент формы
 const placeNameInput = placeFormAdd.querySelector('.popup__place-tittle'); // Добавляем input названия места
@@ -20,17 +21,9 @@ const placeLinkInput = placeFormAdd.querySelector('.popup__place-photo'); // Д�
 // const imagePopup = document.querySelector('.popup_image-place'); // Popup картинки
 // const imageFull = imagePopup.querySelector('.popup__image-full');
 // const imageTittle = imagePopup.querySelector('.popup__image-tittle');
-// const buttonImageClose = document.querySelector('.popup__close-button');
-// const buttonElementEditProfile = document.querySelector('.popup__save-button_edit-profile');
-// const buttonElementAddPlace = document.querySelector('.popup__save-button_add-place')
-const validationConfig = {
-  formSelector: '.popup__content',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__save-button',
-  inactiveButtonClass: 'popup__save-button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-};
+const buttonImageClose = document.querySelector('.popup__close-button');
+const buttonElementEditProfile = document.querySelector('.popup__save-button_edit-profile');
+const buttonElementAddPlace = document.querySelector('.popup__save-button_add-place')
 
 // Функия создания карточки
 function createCard(item) {
@@ -74,33 +67,23 @@ popupList.forEach((popup) => {
   });
 });
 
-// Редактирование профиля
-buttonEditProfile.addEventListener('click', () => {
+
+// Редактируем профиль
+function editProfile() {
   nameInput.value = name.textContent;
   professionInput.value = profession.textContent;
-  // enableButton(buttonElementEditProfile, validationConfig);
-  openPopup(popupEditProfile);
-});
 
-// Отправляем форму и вставляем содержимое на страницу
-function handleSubmitForm(evt) {
+  editProfileValidation.toggleButtonState();
+  openPopup(popupEditProfile);
+}
+
+// Сохраняем изменения профиля
+function handleEditProfileForm(evt) {
   evt.preventDefault();
   name.textContent = nameInput.value;
   profession.textContent = professionInput.value;
   closePopup(popupEditProfile);
 }
-
-// Обработчик событий в форме попапа: он будет следить за событием “submit” - «отправка»
-formElement.addEventListener('submit', handleSubmitForm);
-
-// Добавление публикации
-buttonAddPlace.addEventListener('click', () => {
-  // disableButton(buttonElementAddPlace, validationConfig);
-  openPopup(popupAddPlace);
-})
-
-
-placeFormAdd.addEventListener('submit', publishCard); //Вешаем обработчик события на форму добавления новой карточки. При нажатии на Создать, выполнятся функция addPlace
 
 function openPopup(popup) { // Общая функция открытия popup с аргументом на входе popup
   popup.classList.add('popup_opened');
@@ -118,6 +101,28 @@ function closePopupByEsc(evt) { //Закрытие Popup кнопкой Escape
     closePopup(popupOpened);
   };
 }
+
+
+const editProfileValidation = new FormValidator(validationConfig, editProfileForm);
+const addCardValidation = new FormValidator(validationConfig, placeFormAdd);
+
+// Вещаем обработчик события на кнопку редактирования профиля
+buttonEditProfile.addEventListener('cliсk', () => {
+  editProfile();
+});
+// Вешаем обработчик события на форму редактирования профиля.
+editProfileForm.addEventListener('submit', handleEditProfileForm);
+// Вешаем обработчик события на кнопку добавления карточки
+buttonAddPlace.addEventListener('click', () => {
+  placeFormAdd.reset();
+  addCardValidation.toggleButtonState();
+  openPopup(popupAddPlace);
+})
+// Вешаем обработчик события на форму добавления новой карточки.
+placeFormAdd.addEventListener('submit', publishCard);
+
+editProfileValidation.enableValidation();
+addCardValidation.enableValidation();
 
 export { openPopup };
 
