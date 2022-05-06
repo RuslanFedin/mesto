@@ -92,7 +92,7 @@ function handleEditProfileForm(evt) {
 }
 
 // Вещаем обработчик события на кнопку редактирования профиля
-buttonEditProfile.addEventListener('cliсk', () => {
+buttonEditProfile.addEventListener('click', () => {
   nameInput.value = name.textContent;
   professionInput.value = profession.textContent;
   editProfileValidation.toggleButtonState();
