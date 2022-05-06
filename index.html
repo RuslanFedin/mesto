@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- когда-нибудь здесь будет favicon -->
+  <link rel="shortcut icon" href="">
   <title>Mesto.Платформа для travel-блогеров</title>
   <link rel="stylesheet" href="./pages/index.css">
 </head>
+
 <body>
   <div class="page">
     <header class="header">
@@ -38,29 +42,14 @@
         <button aria-label="Закрыть" class="popup__close-button"></button>
         <form class="popup__content popup__edit-user-form" novalidate name="user">
           <h3 class="popup__title">Редактировать профиль</h3>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              class="popup__input popup__name"
-              minlength="2"
-              maxlength="40"
-              required
-              placeholder="Имя"
-            />
+          <input type="text" id="username" name="username" class="popup__input popup__name" minlength="2" maxlength="40"
+            required placeholder="Имя" />
           <span id="username-error" class="popup__error popup__error_visible"></span>
-            <input
-              type="text"
-              id="about"
-              name="about"
-              class="popup__input popup__profession"
-              minlength="2"
-              maxlength="200"
-              required
-              placeholder="О себе"
-            />
+          <input type="text" id="about" name="about" class="popup__input popup__profession" minlength="2"
+            maxlength="200" required placeholder="О себе" />
           <span id="about-error" class="popup__error popup__error_visible"></span>
-          <button aria-label="Сохранить" type="submit" class="popup__save-button popup__save-button_edit-profile">Сохранить</button>
+          <button aria-label="Сохранить" type="submit"
+            class="popup__save-button popup__save-button_edit-profile">Сохранить</button>
         </form>
       </div>
     </div>
@@ -70,27 +59,14 @@
         <button aria-label="Закрыть" class="popup__close-button"></button>
         <form class="popup__content popup__add-place-form" novalidate name="place">
           <h3 class="popup__title">Новое место</h3>
-            <input
-              type="text"
-              id="nameplace"
-              name="nameplace"
-              class="popup__input popup__name popup__place-tittle"
-              minlength="2"
-              maxlength="30"
-              required
-              placeholder="Название места"
-            />
+          <input type="text" id="nameplace" name="nameplace" class="popup__input popup__place-tittle" minlength="2"
+            maxlength="30" required placeholder="Название места" />
           <span id="nameplace-error" class="popup__error popup__error_visible"></span>
-            <input
-              type="url"
-              id="link"
-              name="link"
-              class="popup__input popup__profession popup__place-photo"
-              required
-              placeholder="Ссылка на картинку"
-            />
+          <input type="url" id="link" name="link" class="popup__input popup__place-photo" required
+            placeholder="Ссылка на картинку" />
           <span id="link-error" class="popup__error popup__error_visible"></span>
-          <button aria-label="Создать" type="submit" class="popup__save-button popup__save-button_add-place">Создать</button>
+          <button aria-label="Создать" type="submit"
+            class="popup__save-button popup__save-button_add-place">Создать</button>
         </form>
       </div>
     </div>
@@ -104,21 +80,20 @@
     </div>
   </div>
 
-<template id="element-template">
-  <li class="element-item">
-    <article class="element-item__article">
-      <button aria-label="Удалить" class="element-item__remove"></button>
-      <img class="element-item__image" src="#" alt="подпись к картинке">
-      <div class="element-item__footer">
-        <h2 class="element-item__title"></h2>
-        <button aria-label="Нравится" class="element-item__like"></button>
-      </div>
-    </article>
-  </li>
-</template>
+  <template id="element-template">
+    <li class="element-item">
+      <article class="element-item__article">
+        <button aria-label="Удалить" class="element-item__remove"></button>
+        <img class="element-item__image" src="#" alt="подпись к картинке">
+        <div class="element-item__footer">
+          <h2 class="element-item__title"></h2>
+          <button aria-label="Нравится" class="element-item__like"></button>
+        </div>
+      </article>
+    </li>
+  </template>
 
-<script src="./scripts/cards.js"></script>
-<script src="./scripts/index.js"></script>
-<script src="./scripts/validate.js"></script>
+  <script type="module" src="./scripts/index.js"></script>
 </body>
+
 </html>
