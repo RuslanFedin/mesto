@@ -37,15 +37,15 @@
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
 
-    <div class="popup popup_edit-profile">
+    <div class="popup popup_type_profile-edit">
       <div class="popup__container">
         <button aria-label="Закрыть" class="popup__close-button"></button>
-        <form class="popup__content popup__edit-user-form" novalidate name="user">
+        <form class="popup__form popup__form_profile-edit" novalidate name="user">
           <h3 class="popup__title">Редактировать профиль</h3>
-          <input type="text" id="username" name="username" class="popup__input popup__name" minlength="2" maxlength="40"
+          <input type="text" id="username" name="username" class="popup__input popup__input_name" minlength="2" maxlength="40"
             required placeholder="Имя" />
           <span id="username-error" class="popup__error popup__error_visible"></span>
-          <input type="text" id="about" name="about" class="popup__input popup__profession" minlength="2"
+          <input type="text" id="about" name="about" class="popup__input popup__input_profession" minlength="2"
             maxlength="200" required placeholder="О себе" />
           <span id="about-error" class="popup__error popup__error_visible"></span>
           <button aria-label="Сохранить" type="submit"
@@ -54,15 +54,15 @@
       </div>
     </div>
 
-    <div class="popup popup_add-place">
+    <div class="popup popup_type_place-add">
       <div class="popup__container">
         <button aria-label="Закрыть" class="popup__close-button"></button>
-        <form class="popup__content popup__add-place-form" novalidate name="place">
+        <form class="popup__form popup__form_place-add" novalidate name="place">
           <h3 class="popup__title">Новое место</h3>
-          <input type="text" id="nameplace" name="nameplace" class="popup__input popup__place-tittle" minlength="2"
+          <input type="text" id="nameplace" name="nameplace" class="popup__input popup__input_place-tittle" minlength="2"
             maxlength="30" required placeholder="Название места" />
           <span id="nameplace-error" class="popup__error popup__error_visible"></span>
-          <input type="url" id="link" name="link" class="popup__input popup__place-photo" required
+          <input type="url" id="link" name="link" class="popup__input popup__input_place-photo" required
             placeholder="Ссылка на картинку" />
           <span id="link-error" class="popup__error popup__error_visible"></span>
           <button aria-label="Создать" type="submit"
@@ -71,8 +71,8 @@
       </div>
     </div>
 
-    <div class="popup popup_image-place">
-      <div class="popup__container popup__image-container">
+    <div class="popup popup_type_image-full">
+      <div class="popup__container popup__container_image">
         <button aria-label="Закрыть" class="popup__close-button"></button>
         <img class="popup__image-full" src="#" alt="подпись к картинке">
         <p class="popup__image-tittle"></p>
