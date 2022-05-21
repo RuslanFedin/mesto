@@ -1,13 +1,4 @@
-const validationConfig = {
-  formSelector: '.popup__content',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__save-button',
-  inactiveButtonClass: 'popup__save-button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
-};
-
-class FormValidator {
+export default class FormValidator {
   constructor(config, form) {
     this._form = form;
     this._input = config.inputSelector;
@@ -19,7 +10,6 @@ class FormValidator {
     this._inputList = Array.from(this._form.querySelectorAll(this._input));
     this._buttonElement = this._form.querySelector(this._submitButton);
   }
-
 
   // Устанавливаем слушатели событий
   _setEventListeners() {
@@ -89,7 +79,4 @@ class FormValidator {
   enableValidation = () => {
     this._setEventListeners();
   };
-
 }
-
-export { validationConfig, FormValidator };
