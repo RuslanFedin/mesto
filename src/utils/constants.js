@@ -28,7 +28,9 @@ export const userData = {
   name: '.profile__name',
   profession: '.profile__profession'
 }
-
+export const idConfig = {
+  elementTemplate: '#element-template',
+};
 export const buttonEditProfile = document.querySelector('.profile__edit-button');
 export const formElement = document.querySelector('.popup__container');
 export const popupEditProfile = document.querySelector('.popup_type_profile-edit');
@@ -50,5 +52,5 @@ export const validationConfig = {
   submitButtonSelector: '.popup__save-button',
   inactiveButtonClass: 'popup__save-button_disabled',
   inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
+  errorClass: 'popup__error_visible',
 };
