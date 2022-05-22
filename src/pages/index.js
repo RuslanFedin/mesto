@@ -19,6 +19,7 @@ import {
   container,
   placeFormAdd,
   validationConfig,
+  idConfig,
 } from "../utils/constants.js"
 
 const addCard = (data) => {
@@ -26,7 +27,7 @@ const addCard = (data) => {
     handleCardClick: (name, link) => {
       fullCard.open(link, name);
     }
-  },'#element-template');
+  }, idConfig.elementTemplate);
   return card.generateCard();
 }
 
