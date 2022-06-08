@@ -103,8 +103,8 @@ const addCard = (data) => {
       deleteCardPopup.open();
     },
   }, idConfig.elementTemplate);
-  console.log(data.owner._id);
-  console.log(card.isIdOwn);
+  // console.log(data.owner._id);
+  // console.log(card.isIdOwn);
   // console.log(userId);
   return card.generateCard();
 }
