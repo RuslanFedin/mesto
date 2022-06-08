@@ -26,8 +26,10 @@
 @import url(../blocks/element-item/__remove/element-item__remove.css);
 @import url(../blocks/element-item/__footer/element-item__footer.css);
 @import url(../blocks/element-item/__title/element-item__title.css);
+@import url(../blocks/element-item/__like-section/element-item__like-section.css);
 @import url(../blocks/element-item/__like/element-item__like.css);
 @import url(../blocks/element-item/__like/element-item__like_active.css);
+@import url(../blocks/element-item/__counter/element-item__counter.css);
 
 
 @import url(../blocks/footer/footer.css);
