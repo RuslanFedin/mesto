@@ -162,7 +162,6 @@ const changeAvatarPopup = new PopupWithForm({
 }, popupChangeAvatar);
 
 const fullCard = new PopupWithImage(imagePopup);
-
 const editProfileValidation = new FormValidator(validationConfig, editProfileForm);
 const addCardValidation = new FormValidator(validationConfig, placeFormAdd);
 const changeAvatarValidation = new FormValidator(validationConfig, avatarChangeForm);

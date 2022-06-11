@@ -52,9 +52,9 @@
           <input type="text" id="username" name="name" class="popup__input popup__input_name" minlength="2" maxlength="40"
             required placeholder="Имя" />
           <span id="username-error" class="popup__error popup__error_visible"></span>
-          <input type="text" id="about" name="about" class="popup__input popup__input_profession" minlength="2"
+          <input type="text" id="about-text" name="about" class="popup__input popup__input_profession" minlength="2"
             maxlength="200" required placeholder="О себе" />
-          <span id="about-error" class="popup__error popup__error_visible"></span>
+          <span id="about-text-error" class="popup__error popup__error_visible"></span>
           <button aria-label="Сохранить" type="submit"
             class="popup__save-button popup__save-button_edit-profile">Сохранить</button>
         </form>
@@ -66,9 +66,9 @@
         <button aria-label="Закрыть" class="popup__close-button"></button>
         <form class="popup__form popup__form_change-avatar" novalidate name="avatar">
           <h3 class="popup__title">Обновить аватар</h3>
-          <input type="url" id="avatar" name="avatar" class="popup__input popup__input_avatar" required
+          <input type="url" id="avatar-link" name="avatar" class="popup__input popup__input_avatar" required
             placeholder="Ссылка на картинку" />
-          <span id="avatar-error" class="popup__error popup__error_visible"></span>
+          <span id="avatar-link-error" class="popup__error popup__error_visible"></span>
           <button aria-label="Создать" type="submit"
             class="popup__save-button popup__save-button_change_avatar">Создать</button>
         </form>
