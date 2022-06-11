@@ -9,10 +9,8 @@ export default class Api {
    // Проверяем выполнение промиса
   _handleResponse(resolve) {
     if (resolve.ok) {
-    // Если успешно, возвращаем ответ в формате json
       return resolve.json();
     } else {
-    // Возврщаем выполненный promise с ошибкой
     return Promise.reject(`ERROR: ${data.status}`);
     }
   }
@@ -30,7 +28,7 @@ export default class Api {
     return fetch(`${this.baseUrl}/cards`,{
       headers: this.headers
     })
-    .then((data) => this._handleResponse(data));
+    .then(this._handleResponse);
   }
 
   // Редактирование данных профиля
@@ -43,7 +41,7 @@ export default class Api {
         about: data.about,
       })
     })
-    .then((data) => this._handleResponse(data));
+    .then(this._handleResponse);
   }
 
     // Добавление новой карточки
@@ -56,9 +54,8 @@ export default class Api {
           link: data.link,
         })
       })
-      .then((data) => this._handleResponse(data))
+      .then(this._handleResponse);
     }
-
 
   // Изменение аватара пользователя
   editUserAvatar(data) {
@@ -69,34 +66,33 @@ export default class Api {
         avatar: data.avatar
       })
     })
-    .then((data) => this._handleResponse(data));
+    .then(this._handleResponse);
   }
 
   // Удаление карточки
   deleteCard(data) {
-    return fetch(`${this.baseUrl}/cards/${cardId}`,{
+    return fetch(`${this.baseUrl}/cards/${data._cardId}`,{
       method: 'DELETE',
       headers: this.headers,
-      body: JSON.stringify(data)
     })
-    .then((data) => this._handleResponse(data));
+    .then(this._handleResponse);
   }
 
   // Лайкнуть карточку
-  setLike(cardId) {
-    return fetch(`${this.baseUrl}/cards/${cardId}/likes`,{
+  setLike(data) {
+    return fetch(`${this.baseUrl}/cards/${data._id}/likes`,{
       method: 'PUT',
       headers: this.headers,
     })
-    .then((cardId) => this._handleResponse(cardId));
+    .then(this._handleResponse);
   }
 
   // Убрать лайк
-  removeLike(cardId) {
-    return fetch(`${this.baseUrl}/cards/${cardId}/likes`,{
+  removeLike(data) {
+    return fetch(`${this.baseUrl}/cards/${data._id}/likes`,{
       method: 'DELETE',
       headers: this.headers,
     })
-    .then((cardId) => this._handleResponse(cardId));
+    .then(this._handleResponse);
   }
 }
