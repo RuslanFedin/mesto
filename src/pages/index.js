@@ -10,6 +10,7 @@ import {
   userData,
   popupChangeAvatar,
   avatarChangeForm,
+  avatarLinkInput,
   buttonChangeAvatar,
   popupDeleteImage,
   buttonEditProfile,
@@ -30,6 +31,7 @@ import Api from '../components/Api.js';
 let userId = null;
 let deletedCard = null;
 
+//Создаем экземпляр Api
 const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-42',
   headers: {
@@ -51,6 +53,7 @@ Promise.all([api.getUserInfo(), api.getCards()])
   })
 
 const addUserInfo = new UserInfo(userData);
+
 const cards = new Section({ // Создаем карточки из массива
   items: [],
   renderer: (items) => {
@@ -69,20 +72,24 @@ const addCard = (data) => {
       deletedCard = card;
       deleteCardPopup.open(deletedCard);
     },
-    setLike: () => {
-      api.setLike(data)
-      .then((data) => {
-        card.setLikesCounter(data);
-      })
-      .catch((error) => {
-        console.log(`ERROR: ${error}`);
-      })
-    },
-    removeLike: () => {
-      api.removeLike(data)
-      .then((data) => {
-        card.setLikesCounter(data);
-      })
+    handleLikeCard: () => {
+      if (card.isLiked()) {
+        api.removeLike(data)
+        .then((newData) => {
+          card.setLikes(newData);
+        })
+        .catch((error) => {
+          console.log(`ERROR: ${error}`);
+        })
+      } else {
+        api.setLike(data)
+        .then((newData) => {
+          card.setLikes(newData);
+        })
+        .catch((error) => {
+          console.log(`ERROR: ${error}`);
+        })
+      }
     },
   }, idConfig.elementTemplate);
 
@@ -96,7 +103,6 @@ const addCardPopup = new PopupWithForm({
     .then((resolve) => {
       const newCard = addCard(resolve);
       cards.setItem(newCard);
-      addCardPopup.toogleButtonText(false);
     })
     .catch((error) => {
       console.log(`ERROR: ${error}`);
@@ -106,14 +112,14 @@ const addCardPopup = new PopupWithForm({
       addCardPopup.close();
     })
   }
-}, popupAddPlace);
+}, '.popup_type_place-add');
 
 const editProfilePopup = new PopupWithForm({
   handleFormSubmit: (userData) => {
     editProfilePopup.toogleButtonText(true);
     api.editUserInfo(userData)
-      .then((resolve) => {
-        addUserInfo.setUserInfo(resolve);
+      .then((updatedUserData) => {
+        addUserInfo.setUserInfo(updatedUserData);
       })
       .catch((error) => {
         console.log(`ERROR: ${error}`);
@@ -123,25 +129,25 @@ const editProfilePopup = new PopupWithForm({
         editProfilePopup.toogleButtonText(false);
       })
   }
-}, popupEditProfile);
+}, '.popup_type_profile-edit');
 
 const deleteCardPopup = new PopupWithSubmit({
   handleFormSubmit: (data) => {
     api.deleteCard(data)
-    .then(() => {
-      deletedCard.removeCard();
-    })
-    .then(() => {
-      deletedCard = null;
-    })
-    .catch((error) => {
-      console.log(`ERROR: ${error}`);
-    })
-    .finally(() => {
-      deleteCardPopup.close();
-    })
+      .then(() => {
+        deletedCard.removeCard();
+      })
+      .then(() => {
+        deletedCard = null;
+      })
+      .catch((error) => {
+        console.log(`ERROR: ${error}`);
+      })
+      .finally(() => {
+        deleteCardPopup.close();
+      })
   }
-}, popupDeleteImage);
+}, '.popup_type_image-delete');
 
 const changeAvatarPopup = new PopupWithForm({
   handleFormSubmit: (data) => {
@@ -149,7 +155,6 @@ const changeAvatarPopup = new PopupWithForm({
     api.editUserAvatar(data)
     .then((data) => {
       addUserInfo.setUserAvatar(data);
-      changeAvatarPopup.toogleButtonText(false);
     })
     .catch((error => {
       console.log(`ERROR: ${error}`);
@@ -159,13 +164,13 @@ const changeAvatarPopup = new PopupWithForm({
       changeAvatarPopup.close();
     })
   }
-}, popupChangeAvatar);
+}, '.popup_type_change-avatar');
 
-const fullCard = new PopupWithImage(imagePopup);
+const fullCard = new PopupWithImage('.popup_type_image-full');
+
 const editProfileValidation = new FormValidator(validationConfig, editProfileForm);
 const addCardValidation = new FormValidator(validationConfig, placeFormAdd);
 const changeAvatarValidation = new FormValidator(validationConfig, avatarChangeForm);
-
 
 function editProfile() {
   const addedUserData = addUserInfo.getUserInfo();
@@ -178,7 +183,6 @@ function editProfile() {
 editProfileValidation.enableValidation();
 addCardValidation.enableValidation();
 changeAvatarValidation.enableValidation();
-
 
 fullCard.setEventListeners();
 editProfilePopup.setEventListeners();
@@ -194,9 +198,6 @@ buttonAddPlace.addEventListener('click', () => {
   addCardPopup.open();
 });
 buttonChangeAvatar.addEventListener('click', () => {
+  changeAvatarValidation.toggleButtonState();
   changeAvatarPopup.open();
 });
-
-
-
-

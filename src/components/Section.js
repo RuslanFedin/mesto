@@ -5,16 +5,11 @@ export default class Section {
     this._container = containerSelector;
   }
 
-  // Отрисовываем элементы
-  rendererItems(items){
-    items.forEach((item) => {
-      this._renderer(item);
-    })
+  rendererItems(items) {
+    items.forEach(this._renderer);
   }
 
-    // Принимаем DOM-элемент и добавляем его в контейнер
-    setItem(element){
-      this._container.prepend(element);
-    }
-
+  setItem(element){
+    this._container.prepend(element);
+  }
 }
