@@ -28,6 +28,7 @@ export const avatarLinkInput = popupChangeAvatar.querySelector('.popup__input_av
 export const buttonChangeAvatar = document.querySelector('.profile__change-avatar-button');
 export const container = document.querySelector('.elements__photo-grid');
 
+
 export const validationConfig = {
   formSelector: '.popup__content',
   inputSelector: '.popup__input',

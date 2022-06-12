@@ -6,21 +6,18 @@ export default class Api {
     this.headers = options.headers;
   }
 
-   // Проверяем выполнение промиса
+   // Проверяем ответ от сервера
   _handleResponse(resolve) {
-    if (resolve.ok) {
-      return resolve.json();
-    } else {
-    return Promise.reject(`ERROR: ${data.status}`);
-    }
+    return resolve.ok? resolve.json() : Promise.reject(`ERROR: ${data.status}`);
   }
+
 
   // Загрузка информации о пользователе с сервера
   getUserInfo() {
     return fetch(`${this.baseUrl}/users/me`, {
       headers: this.headers
     })
-    .then((data) => this._handleResponse(data))
+    .then(this._handleResponse);
   }
 
   // Загрузка карточек с сервера
@@ -36,10 +33,7 @@ export default class Api {
     return fetch(`${this.baseUrl}/users/me`,{
       method: 'PATCH',
       headers: this.headers,
-      body: JSON.stringify({
-        name: data.name,
-        about: data.about,
-      })
+      body: JSON.stringify(data),
     })
     .then(this._handleResponse);
   }
@@ -49,10 +43,7 @@ export default class Api {
       return fetch(`${this.baseUrl}/cards`,{
         method: 'POST',
         headers: this.headers,
-        body: JSON.stringify({
-          name: data.name,
-          link: data.link,
-        })
+        body: JSON.stringify(data),
       })
       .then(this._handleResponse);
     }
@@ -62,9 +53,7 @@ export default class Api {
     return fetch(`${this.baseUrl}/users/me/avatar`,{
       method: 'PATCH',
       headers: this.headers,
-      body: JSON.stringify({
-        avatar: data.avatar
-      })
+      body: JSON.stringify(data),
     })
     .then(this._handleResponse);
   }
@@ -77,6 +66,7 @@ export default class Api {
     })
     .then(this._handleResponse);
   }
+
 
   // Лайкнуть карточку
   setLike(data) {
