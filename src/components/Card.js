@@ -34,21 +34,21 @@ handleLikeCard}, cardSelector) {
 
   isLiked = () => this._likes.likes.some((owner) => owner._id === this._userId);
 
-  setActiveClass = () => {
+  _setActiveClass = () => {
     this._buttonLike.classList.add('element-item__like_active');
   }
 
-  removeActiveClass = () => {
+  _removeActiveClass = () => {
     this._buttonLike.classList.remove('element-item__like_active');
   }
 
-  checkOwnLike() {
-    this.isLiked() ? this.setActiveClass() : this.removeActiveClass();
+  _checkOwnLike() {
+    this.isLiked() ? this._setActiveClass() : this._removeActiveClass();
   }
 
   setLikes(newData) {
    this._likes = newData;
-   this.checkOwnLike(newData);
+   this._checkOwnLike(newData);
    this._counter.textContent = newData.likes.length;
   }
 

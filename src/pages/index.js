@@ -73,23 +73,16 @@ const addCard = (data) => {
       deleteCardPopup.open(deletedCard);
     },
     handleLikeCard: () => {
-      if (card.isLiked()) {
-        api.removeLike(data)
+      const action = card.isLiked()
+        ? api.removeLike(data)
+        : api.setLike(data);
+      action
         .then((newData) => {
           card.setLikes(newData);
         })
         .catch((error) => {
           console.log(`ERROR: ${error}`);
         })
-      } else {
-        api.setLike(data)
-        .then((newData) => {
-          card.setLikes(newData);
-        })
-        .catch((error) => {
-          console.log(`ERROR: ${error}`);
-        })
-      }
     },
   }, idConfig.elementTemplate);
 
